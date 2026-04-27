@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Cases App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #3a0ca3);
+      color: white;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 2px solid white;
+    }
+
+    .username {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .cases {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .case {
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .case:hover {
+      transform: scale(1.05);
+      background: rgba(255,255,255,0.2);
+    }
+
+    .case h2 {
+      margin: 10px 0;
+    }
+
+    .price {
+      font-size: 20px;
+      color: #ffd60a;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">
+  <img id="avatar" class="avatar" src="" />
+  <div class="username" id="username">User</div>
+</div>
+
+<div class="cases">
+  <div class="case" onclick="openCase(1)">
+    <h2>Basic Case</h2>
+    <div class="price">1 ⭐</div>
+  </div>
+
+  <div class="case" onclick="openCase(3)">
+    <h2>Medium Case</h2>
+    <div class="price">3 ⭐</div>
+  </div>
+
+  <div class="case" onclick="openCase(5)">
+    <h2>Pro Case</h2>
+    <div class="price">5 ⭐</div>
+  </div>
+</div>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+
+  const user = tg.initDataUnsafe.user;
+
+  if (user) {
+    document.getElementById("username").innerText =
+      user.first_name + (user.last_name ? " " + user.last_name : "");
+
+    if (user.photo_url) {
+      document.getElementById("avatar").src = user.photo_url;
+    }
+  }
+
+  function openCase(price) {
+    alert("Тут буде покупка кейсу за " + price + " ⭐");
+    
+    // тут пізніше підключимо оплату Stars
+  }
+</script>
+
+</body>
+</html>
